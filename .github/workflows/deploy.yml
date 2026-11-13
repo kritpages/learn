@@ -1,7 +1,7 @@
 name: Deploy Static Apps to GitHub Pages
 
 # Publishes every subject folder that has an index.html (maths/, physics/, …) to GitHub Pages,
-# so each app is served at /<repo>/<subject>/. The root index.html (the subject list) is published too.
+# so each app is served at /<repo>/<subject>/ (for example /learn/maths/). There is no root page.
 # One-time setup: repo Settings → Pages → Source: "GitHub Actions".
 
 on:
@@ -45,8 +45,7 @@ jobs:
 
           test -n "$(find site -name index.html -print -quit)"
 
-          # Landing page listing the subjects, and no Jekyll processing.
-          if [ -f index.html ]; then cp index.html site/; fi
+          # Serve the files as they are, with no Jekyll processing.
           touch site/.nojekyll
 
       - name: Upload Pages artifact
